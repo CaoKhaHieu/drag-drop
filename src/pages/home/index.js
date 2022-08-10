@@ -32,11 +32,12 @@ const data = [
 
 const Home = () => {
   const [list, setList] = useState(data);
+  const [inputValue, setInputValue] = useState('');
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
     const items = [...list];
-    
+
     // remove item in source index
     const [reorderedItem] = items.splice(result.source.index, 1);
     // add item removed to destionation index
@@ -44,9 +45,27 @@ const Home = () => {
     setList(items);
   };
 
+  const handleChangeInput = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newList = [...list, {
+      id: `${+list[list.length -1].id + 1}`,
+      title: inputValue
+    }];
+    setList(newList);
+    setInputValue('');
+  };
+
   return (
     <div className='home-page'>
       <h1>Home Page</h1>
+      <form onSubmit={handleSubmit}>
+        <input type={'text'} placeholder='Create new section' onChange={handleChangeInput}></input>
+        <button>Add</button>
+      </form>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="characters" direction='horizontal'>
           {(provided) => (
