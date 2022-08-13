@@ -16,5 +16,13 @@
 .column {
   min-width: 300px;
   min-height: 400px;
-  background: green;
+  background-color: antiquewhite;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.seacrh-input {
+  width: 100%;
+  padding: .5rem 1rem;
+  border: 1px solid #fff;
+  outline: none;
 }

@@ -1,6 +1,14 @@
-.column {
-  width: 20%;
-  height: 100%;
-  min-height: 400px;
-  background: green;
+.list-user {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+.user-item {
+  border: 1px solid #fff;
+  border-radius: 100px;
+  padding: .5rem 1rem;
+  margin-bottom: 1rem;
+  &.active {
+    background-color: gold;
+  }
 }

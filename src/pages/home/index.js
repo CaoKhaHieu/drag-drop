@@ -30,6 +30,17 @@ const data = [
   },
 ];
 
+const listUser = [
+  {
+    id: '1',
+    name: 'Cao Kha Hieu'
+  },
+  {
+    id: '2',
+    name: 'Nguyen Quoc Huy',
+  }
+];
+
 const Home = () => {
   const [list, setList] = useState(data);
   const [inputValue, setInputValue] = useState('');
@@ -59,6 +70,13 @@ const Home = () => {
     setInputValue('');
   };
 
+  const handleDelete = (id) => {
+    const indexItem = list.findIndex((item) => item.id === id);
+    const newList = [...list];
+    newList.splice(indexItem, 1);
+    setList(newList);
+  };
+
   return (
     <div className='home-page'>
       <h1>Home Page</h1>
@@ -66,6 +84,7 @@ const Home = () => {
         <input type={'text'} placeholder='Create new section' onChange={handleChangeInput}></input>
         <button>Add</button>
       </form>
+
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="characters" direction='horizontal'>
           {(provided) => (
@@ -75,7 +94,7 @@ const Home = () => {
                   <Draggable key={id} draggableId={id} index={index}>
                     {(provided) => (
                       <li className='column' ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        <Column title={title} />
+                        <Column id={id} title={title} onDelete={handleDelete} listUser={listUser} />
                       </li>
                     )}
                   </Draggable>
